@@ -38,4 +38,9 @@ class Producto extends Model
     {
         return $this->belongsTo(Categoria::class);
     }
+
+    public function compras():HasMany
+    {
+        return $this->hasMany(Compra::class);
+    }
 }

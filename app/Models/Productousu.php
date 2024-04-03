@@ -11,6 +11,22 @@ class Productousu extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'titulo',
+        'precio',
+        'imagen',
+        'descripcion',
+        'activo',
+        'fechaSubida',
+        'categoria_id',
+        'usuario_id'
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
+
     public function categoria():BelongsTo
     {
         return $this->belongsTo(Categoria::class);
@@ -29,5 +45,10 @@ class Productousu extends Model
     public function ventas():HasMany
     {
         return $this->hasMany(Venta::class);
+    }
+
+    public function compras():HasMany
+    {
+        return $this->hasMany(Compra::class);
     }
 }

@@ -10,6 +10,24 @@ class Usuario extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nombre',
+        'avatar',
+        'contraseña',
+        'correo',
+        'calle',
+        'numeroCalle',
+        'codigoPostal',
+        'latitud',
+        'longitud',
+        'me',
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
+
     public function valoraciones():HasMany
     {
         return $this->hasMany(Valoracion::class);
@@ -28,5 +46,10 @@ class Usuario extends Model
     public function ventas():HasMany
     {
         return $this->hasMany(Venta::class);
+    }
+
+    public function compras():HasMany
+    {
+        return $this->hasMany(Compra::class);
     }
 }

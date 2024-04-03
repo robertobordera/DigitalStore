@@ -22,6 +22,7 @@ return new class extends Migration
             $table->float('latitud');
             $table->float('longitud');
             $table->string('avatar')->nullable();
+            $table->boolean('me')->default(false);
             $table->timestamps();
         });
     }

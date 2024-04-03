@@ -22,7 +22,8 @@ class UsuarioSeeder extends Seeder
             'numeroCalle' => '98',
             'codigoPostal' => 3690,
             'latitud' => 65.4,
-            'longitud' => 78.5
+            'longitud' => 78.5,
+            'me'=>true,
         ]);
 
         Usuario::create([
@@ -33,7 +34,8 @@ class UsuarioSeeder extends Seeder
             'numeroCalle' => '98',
             'codigoPostal' => 8855,
             'latitud' => 65.4,
-            'longitud' => 78.5
+            'longitud' => 78.5,
+            'me'=>false,
         ]);
 
         Usuario::create([
@@ -44,7 +46,8 @@ class UsuarioSeeder extends Seeder
             'numeroCalle' => '98',
             'codigoPostal' => 5454,
             'latitud' => 65.4,
-            'longitud' => 78.5
+            'longitud' => 78.5,
+            'me'=>false,
         ]);
     }
 }

@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comentariousus', function (Blueprint $table) {
+        Schema::create('compras', function (Blueprint $table) {
             $table->id();
-            $table->string('comentario');
-            $table->date('fecha')->default(date('Y-m-d H:i'));
-            $table->unsignedBigInteger('productousu_id');
+            $table->float('total');
+            $table->date('fecha')->default(date('Y-m-d'));
+            $table->unsignedBigInteger('productousu_id')->nullable();
+            $table->unsignedBigInteger('producto_id')->nullable();
             $table->unsignedBigInteger('usuario_id');
             $table->timestamps();
         });
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comentariousus');
+        Schema::dropIfExists('compras');
     }
 };

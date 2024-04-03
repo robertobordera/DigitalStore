@@ -10,6 +10,24 @@ class Comentariousu extends Model
 {
     use HasFactory;
 
+    // protected $fillable = [
+    //     'nombre',
+    //     'avatar',
+    //     'contraseña',
+    //     'correo',
+    //     'calle',
+    //     'numeroCalle',
+    //     'codigoPostal',
+    //     'latitud',
+    //     'longitud',
+    //     'me',
+    // ];
+
+    // protected $hidden = [
+    //     'created_at',
+    //     'updated_at'
+    // ];
+
     public function usuario():BelongsTo{
         return $this->belongsTo(Usuario::class);
     }
