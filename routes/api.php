@@ -14,9 +14,10 @@ Route::get('/usuarios/{id}/reseñas', [UsuarioController::class, 'obtenerReseña
 Route::get('/usuarios/misProductos',[UsuarioController::class,'ObtenerMisProductos']);
 Route::get('/usuarios/comentarios',[UsuarioController::class,'MisComentarios']);
 Route::post('/usuarios/perfil', [UsuarioController::class, 'CambiarDatos']);
+Route::post('/usuarios/comentarios/{id}',[UsuarioController::class,'EditarComentarios']);
 
 
-Route::get('/productosusu/{idUsuario}/productosMarketPlace',[ProductoUsuController::class,'ObtenerProductosSubidos']);
+Route::get('/productosusu/usuarios/{idUsuario}/productosMarketPlace',[ProductoUsuController::class,'ObtenerProductosSubidos']);
 Route::get('/productosusu/productosMarketPlace',[ProductoUsuController::class,'ObtenerProductosTodos']);
 Route::get('/productosusu/{idUsuario}/productosMarketPlace/{idProducto}',[ProductoUsuController::class,'ventas']);
 Route::get('/productosusu/productosMarketPlace/comentarios/{idProducto}',[ProductoUsuController::class,'ObtenerComentariosProducto']);

@@ -16,24 +16,28 @@ class ComentariousuSeeder extends Seeder
         Comentariousu::create([
             'comentario' => '¿El precio es negociable?',
             'productousu_id' => 4,
+            'editado'=>false,
             'usuario_id'=> 1
         ]);
 
         Comentariousu::create([
             'comentario' => '¿Haces envios?',
             'productousu_id' => 5,
+            'editado'=>false,
             'usuario_id'=> 1
         ]);
 
         Comentariousu::create([
             'comentario' => 'Me interesa',
             'productousu_id' => 5,
+            'editado'=>false,
             'usuario_id'=> 2
         ]);
 
         Comentariousu::create([
             'comentario' => 'Cuando podemos quedar',
             'productousu_id' => 5,
+            'editado'=>false,
             'usuario_id'=> 1
         ]);
     }

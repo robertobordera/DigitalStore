@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Producto;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 
 use function Pest\Laravel\json;
 
@@ -28,6 +29,17 @@ class ProductoController extends Controller
     public function store(Request $request):JsonResponse
     {
         $producto = Producto::create($request->all());
+
+        if($request->hasFile('imagen')){
+            $imagen = $request -> file('imagen');
+
+            $imagenBase64 = base64_encode(file_get_contents($imagen->path()));
+
+            $producto->imagen = $imagenBase64; 
+
+            $producto->save();
+        }
+
         return response()->json([
             'success' => true,
             'data' => $producto
@@ -44,6 +56,10 @@ class ProductoController extends Controller
         ],200);
     }
     
+    public function create() : View{
+        return view('producto.create');
+    }
+
     public function valoraciones(string $id):JsonResponse
     {
         $producto = Producto::find($id);

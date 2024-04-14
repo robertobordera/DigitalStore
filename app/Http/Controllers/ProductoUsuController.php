@@ -13,25 +13,6 @@ use Illuminate\Http\Request;
 
 class ProductoUsuController extends Controller
 {
-    public function SubirProducto(Request $request):JsonResponse
-    {
-        $miUsuario = Usuario::where('me',true);
-        $producto = Productousu::create([
-            'titulo' =>$request->titulo,
-            'precio' =>$request->precio,
-            'descripcion'=>$request->descripcion,
-            'activo'=>$request->activo,
-            'fechaSubida'=>date('Y-m-d'),
-            'categoria_id'=>3,
-            'usuario_id'=>$miUsuario->id
-        ]);
-
-        return response()->json([
-            'success' => true,
-            'data'=>$producto
-        ],201);
-    }
-
     public function ObtenerProductosSubidos(string $id):JsonResponse
     {
         $productos = Productousu::where('usuario_id',$id)->get();
@@ -113,6 +94,25 @@ class ProductoUsuController extends Controller
             'success' => true,
             'data' => [$venta,$compra]
         ], 200);
+    }
+
+    public function SubirProducto(Request $request):JsonResponse
+    {
+        $miUsuario = Usuario::where('me',true);
+        $producto = Productousu::create([
+            'titulo' =>$request->titulo,
+            'precio' =>$request->precio,
+            'descripcion'=>$request->descripcion,
+            'activo'=>$request->activo,
+            'fechaSubida'=>date('Y-m-d'),
+            'categoria_id'=>3,
+            'usuario_id'=>$miUsuario->id
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'data'=>$producto
+        ],201);
     }
     
 }

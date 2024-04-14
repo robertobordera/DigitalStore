@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('comentario');
             $table->date('fecha')->default(date('Y-m-d H:i'));
+            $table->boolean('editado')->default(false);
             $table->unsignedBigInteger('productousu_id');
             $table->unsignedBigInteger('usuario_id');
             $table->timestamps();

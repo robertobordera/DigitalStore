@@ -27,6 +27,22 @@ class UsuarioController extends Controller
         ], 200);
     }
 
+    public function EditarComentario(Request $request, int $id):JsonResponse
+    {
+        //Por hacer
+        $comentarioEditar = Comentariousu::find($id);
+
+        $comentarioEditar::update([
+            'comentario' => $request->comentario,
+            'editado' => true
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'comentario editado con exito',
+            'data' => $comentarioEditar
+        ],200);
+    }
     public function CambiarDatos(Request $request): JsonResponse
     {
         $miUsuario = Usuario::where('me', true)->first();
@@ -57,8 +73,6 @@ class UsuarioController extends Controller
         }
         
     }
-
-
 
     public function ObtenerMisProductos(): JsonResponse
     {
