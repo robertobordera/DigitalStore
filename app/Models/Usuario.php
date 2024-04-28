@@ -5,21 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
-class Usuario extends Model
+class Usuario extends Authenticatable implements AuthenticatableContract
 {
-    use HasFactory;
+    use HasApiTokens,HasFactory,Notifiable;
 
     protected $fillable = [
         'nombre',
-        'avatar',
-        'contraseña',
+        // 'avatar',
+        'password',
         'correo',
         'calle',
         'numeroCalle',
         'codigoPostal',
-        'latitud',
-        'longitud',
+        'provincia',
+        // 'latitud',
+        // 'longitud',
         'me',
     ];
 

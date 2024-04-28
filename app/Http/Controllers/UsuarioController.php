@@ -10,6 +10,7 @@ use App\Models\Usuario;
 use App\Models\Venta;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -91,27 +92,27 @@ class UsuarioController extends Controller
         $miUsuario = Usuario::where('me', true)->get()->first();
         $miUsuario = Usuario::find($miUsuario->id);
 
-        if ($request->contraseña1 != $request->contraseña2) {
-            if (strlen($request->contraseña1) > 5) {
+        if ($request->password1 != $request->password2) {
+            if (strlen($request->password1) > 5) {
                 $miUsuario::update([
-                    'contraseña' => $request->contraseña1
+                    'password' => $request->password1
                 ]);
 
                 return response()->json([
                     'success' => true,
-                    'message' => "contraseña cambiado con exito",
+                    'message' => "password cambiado con exito",
                     'data' => $miUsuario,
                 ], 200);
             } else {
                 return response()->json([
                     'succeess' => false,
-                    'message' => "La contraseña debe tener una longitud mayor a 5 caracteres",
+                    'message' => "La password debe tener una longitud mayor a 5 caracteres",
                 ], 200);
             }
         } else {
             return response()->json([
                 'succeess' => false,
-                'message' => "Las contraseñas no puedes coincidir",
+                'message' => "Las passwords no puedes coincidir",
             ], 401);
         }
     }
@@ -141,4 +142,5 @@ class UsuarioController extends Controller
             ], 401);
         }
     }
+
 }

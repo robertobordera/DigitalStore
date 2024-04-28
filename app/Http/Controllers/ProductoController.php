@@ -7,35 +7,35 @@ use App\Models\Producto;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
-
-use function Pest\Laravel\json;
+use Illuminate\Support\Facades\DB;
+use App\Models\Valoracion;
+// use function Pest\Laravel\json;
 
 class ProductoController extends Controller
 {
-   
-    public function index():JsonResponse
+
+    public function index(): JsonResponse
     {
         $producto = Producto::all();
-        $producto = Producto::where('activo',true)->get();
-
+        $producto = Producto::where('activo', true)->get();
 
         return response()->json([
-            'success'=>true,
-            'data'=>$producto
-        ],200);
+            'success' => true,
+            'datas' => $producto
+        ], 200);
     }
 
-   
-    public function store(Request $request):JsonResponse
+
+    public function store(Request $request): JsonResponse
     {
         $producto = Producto::create($request->all());
 
-        if($request->hasFile('imagen')){
-            $imagen = $request -> file('imagen');
+        if ($request->hasFile('imagen')) {
+            $imagen = $request->file('imagen');
 
             $imagenBase64 = base64_encode(file_get_contents($imagen->path()));
 
-            $producto->imagen = $imagenBase64; 
+            $producto->imagen = $imagenBase64;
 
             $producto->save();
         }
@@ -43,42 +43,61 @@ class ProductoController extends Controller
         return response()->json([
             'success' => true,
             'data' => $producto
-        ],201);
+        ], 201);
     }
 
-    public function show(string $id):JsonResponse
+    public function show(string $id): JsonResponse
     {
         $producto = Producto::find($id);
-        
+
         return response()->json([
             'success' => true,
-            'data'=>$producto
-        ],200);
+            'data' => $producto
+        ], 200);
     }
-    
-    public function create() : View{
+
+    public function create(): View
+    {
         return view('producto.create');
     }
 
-    public function valoraciones(string $id):JsonResponse
+    public function valoraciones(string $id): JsonResponse
     {
-        $producto = Producto::find($id);
-        $valoraciones = $producto->valoraciones;
+        // $producto = Producto::find($id);
+        // $valoraciones = $producto->valoraciones;
 
-        $comentarios = [];
-        foreach($valoraciones as $valoracion)
-        {
-            $comentarios[] = $valoracion;
-        }
+        // $comentarios = [];
+        // foreach($valoraciones as $valoracion)
+        // {
+        //     $comentarios[] = $valoracion;
+        // }
+        $valoraciones = Valoracion::join('usuarios', 'valoraciones.usuario_id', '=', 'usuarios.id')
+            ->select('valoraciones.id', 'usuarios.nombre', 'valoraciones.comentario', 'valoraciones.puntuacion', 'valoraciones.fecha')
+            ->where('valoraciones.producto_id', $id)
+            ->get();
+
         return response()->json([
             'success' => true,
-            'data'=>$comentarios
-        ],200);
+            'valoraciones' => $valoraciones
+        ], 200);
     }
 
-     
+                                
+    public function productosCategoria(string $id): JsonResponse
+    {
+        $productosCategoria = Producto::where('categoria_id', $id)
+            ->where('activo', true)
+            ->get();
 
-    public function update(Request $request, string $id):JsonResponse
+        return response()->json([
+            'success' => true,
+            'datas' => $productosCategoria
+        ], 200);
+    }
+
+
+
+    public function update(Request $request, string $id): JsonResponse
     {
         $producto = Producto::find($id);
         $producto->update($request->all());
@@ -86,7 +105,7 @@ class ProductoController extends Controller
         return response()->json([
             'success' => true,
             'data' => $producto
-        ],200);
+        ], 200);
     }
 
 

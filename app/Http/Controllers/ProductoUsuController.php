@@ -58,7 +58,6 @@ class ProductoUsuController extends Controller
     }
     public function ventas(int $idProducto, int $idUsuario): JsonResponse
     {
-        
         $miUsuario = Usuario::where('me',true)->get()->first();
          
         // Buscar el producto en base al ID proporcionado

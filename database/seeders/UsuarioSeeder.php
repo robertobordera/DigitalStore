@@ -23,7 +23,7 @@ class UsuarioSeeder extends Seeder
             'codigoPostal' => 3690,
             'latitud' => 65.4,
             'longitud' => 78.5,
-            'me'=>true,
+            'me'=>false,
         ]);
 
         Usuario::create([
