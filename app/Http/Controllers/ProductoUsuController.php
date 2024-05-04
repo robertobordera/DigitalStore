@@ -24,11 +24,23 @@ class ProductoUsuController extends Controller
 
     public function ObtenerProductosTodos():JsonResponse
     {
-        $productos_usuarios = Productousu::where('activo',true)->get();
+        $productos_usuarios = Productousu::where('activo',true)->with('usuario')->get();
         return response()->json([
             'success' => true,
             'data' => $productos_usuarios
         ],200);
+    }
+
+    public function ObtenerProducto(string $id):JsonResponse
+    {
+        $productoUsuario = Productousu::where('id', $id)->with('usuario')->first();
+        $productoUsuario->usuario->loadCount('ventas');
+        // $productoUsuario->totalVentas = $ventas->ventas_count;
+
+        return response()->json([
+            'success' => true,
+            "data" => $productoUsuario
+        ],201);
     }
 
     public function ObtenerComentariosProducto(int $id):JsonResponse{
@@ -39,21 +51,18 @@ class ProductoUsuController extends Controller
         ->where('productousus.id', $id)
         ->get();
 
-        if($comentarios)
-        {
+        if($comentarios->isEmpty()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'No existen comentarios',
+                'data' => []
+            ], 200);
+        } else {
             return response()->json([
                 'success' => true,
                 'message' => 'Mostrando comentarios',
                 'data' => $comentarios
-            ],200);
-        }
-        else 
-        {
-            return response()->json([
-                'success' => true,
-                'message' => 'No existen comentarios',
-                'data' => $comentarios
-            ],200);
+            ], 200);
         }
     }
     public function ventas(int $idProducto, int $idUsuario): JsonResponse

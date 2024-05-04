@@ -14,15 +14,21 @@ Route::get('/productos/categoria/{id}', [ProductoController::class, 'productosCa
 Route::get('/usuarios/{id}/reseñas', [UsuarioController::class, 'obtenerReseñasRealizas']);
 Route::get('/usuarios/misProductos',[UsuarioController::class,'ObtenerMisProductos']);
 Route::get('/usuarios/comentarios',[UsuarioController::class,'MisComentarios']);
+Route::get('/usuarios/me',[UsuarioController::class,'misDatos']);
 Route::post('/usuarios/perfil', [UsuarioController::class, 'CambiarDatos']);
 Route::post('/usuarios/comentarios/{id}',[UsuarioController::class,'EditarComentarios']);
+Route::put('/usuarios/actualizarCorreo',[UsuarioController::class,'actualizarCorreo']);
+Route::put('/usuarios/actualizarPassword',[UsuarioController::class,'actualizarPassword']);
+Route::put('/usuarios/actualizarDireccion',[UsuarioController::class,'actualizarDireccion']);
+Route::put('/usuarios/actualizarNombre',[UsuarioController::class,'actualizarNombre']);
 
 
-Route::get('/productosusu/usuarios/{idUsuario}/productosMarketPlace',[ProductoUsuController::class,'ObtenerProductosSubidos']);
-Route::get('/productosusu/productosMarketPlace',[ProductoUsuController::class,'ObtenerProductosTodos']);
-Route::get('/productosusu/{idUsuario}/productosMarketPlace/{idProducto}',[ProductoUsuController::class,'ventas']);
-Route::get('/productosusu/productosMarketPlace/comentarios/{idProducto}',[ProductoUsuController::class,'ObtenerComentariosProducto']);
-Route::post('/productosusu/{idUsuario}/productosMarketPlace/{producto}',[ProductoUsuController::class,'SubirProducto']);
+Route::get('/marketPlace/productos/usuarios/{idUsuario}',[ProductoUsuController::class,'ObtenerProductosSubidos']);
+Route::get('/marketPlace/productos',[ProductoUsuController::class,'ObtenerProductosTodos']);
+Route::get('/marketPlace/producto/{idProducto}',[ProductoUsuController::class,'ObtenerProducto']);
+Route::get('/marketPlace/{idUsuario}/productos/{idProducto}',[ProductoUsuController::class,'ventas']);
+Route::get('/marketPlace/productos/comentarios/{idProducto}',[ProductoUsuController::class,'ObtenerComentariosProducto']);
+Route::post('/marketPlace/{idUsuario}/productosMarketPlace/{producto}',[ProductoUsuController::class,'SubirProducto']);
 
 Route::post('/auth/registro',[AuthController::class,'crearUsuario']);
 Route::post('/auth/login',[AuthController::class,'loginUsuario']);

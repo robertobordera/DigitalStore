@@ -48,7 +48,9 @@ class AuthController extends Controller
 
         $user = Usuario::where('correo',$request->correo)->first();
         $user->update([
-            'me'=>true
+            'me'=>true,
+            'latitud' => $request->latitud,
+            'longitud' => $request->longitud
         ]);
 
         return response()->json([

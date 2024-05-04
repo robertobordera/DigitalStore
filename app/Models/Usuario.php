@@ -23,8 +23,8 @@ class Usuario extends Authenticatable implements AuthenticatableContract
         'numeroCalle',
         'codigoPostal',
         'provincia',
-        // 'latitud',
-        // 'longitud',
+        'latitud',
+        'longitud',
         'me',
     ];
 

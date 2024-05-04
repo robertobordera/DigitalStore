@@ -28,7 +28,7 @@ class UsuarioController extends Controller
         ], 200);
     }
 
-    public function EditarComentario(Request $request, int $id):JsonResponse
+    public function EditarComentario(Request $request, int $id): JsonResponse
     {
         //Por hacer
         $comentarioEditar = Comentariousu::find($id);
@@ -42,7 +42,7 @@ class UsuarioController extends Controller
             'success' => true,
             'message' => 'comentario editado con exito',
             'data' => $comentarioEditar
-        ],200);
+        ], 200);
     }
     public function CambiarDatos(Request $request): JsonResponse
     {
@@ -59,20 +59,18 @@ class UsuarioController extends Controller
                 'success' => false,
                 'message' => "El email o el nombre de usuario ya existen"
             ], 200);
-        } else 
-        {
+        } else {
             $miUsuario->update([
                 'correo' => $request->correo,
                 'nombre' => $request->nombre
             ]);
-    
+
             return response()->json([
                 'success' => true,
                 'message' => "Datos actualizados con éxito",
                 'data' => $miUsuario
             ], 200);
         }
-        
     }
 
     public function ObtenerMisProductos(): JsonResponse
@@ -143,4 +141,87 @@ class UsuarioController extends Controller
         }
     }
 
+    public function misDatos(): JsonResponse
+    {
+        $miUsuario = Usuario::where('me', true)->first();
+
+        return response()->json([
+            'success' => true,
+            'usuario' => $miUsuario
+        ], 201);
+    }
+
+    public function actualizarCorreo(Request $request): JsonResponse
+    {
+        $miUsuario = Usuario::where('me', true)->first();
+        $miUsuario->update([
+            'correo' => $request->correo
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => "Correo actualizado con exito"
+        ], 201);
+    }
+
+    public function actualizarPassword(Request $request): JsonResponse
+    {
+        $miUsuario = Usuario::where('me', true)->first();
+        $miUsuario->update([
+            'password' => Hash::make($request->password),
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => "Contraseña actualizada con exito"
+        ], 201);
+    }
+
+    public function actualizarDireccion(Request $request): JsonResponse
+    {
+        $miUsuario = Usuario::where('me', true)->first();
+
+        if ($request->filled('calle')) {
+            $miUsuario->update([
+                'calle' => $request->calle,
+            ]);
+        }
+        
+        if ($request->filled('numeroCalle')) {
+            $miUsuario->update([
+                'numeroCalle' => $request->numeroCalle,
+            ]);
+        }
+        
+        if ($request->filled('codigoPostal')) {
+            $miUsuario->update([
+                'codigoPostal' => $request->codigoPostal,
+            ]);
+        }
+        
+        if ($request->filled('provincia')) {
+            $miUsuario->update([
+                'provincia' => $request->provincia,
+            ]);
+        }
+        
+
+        return response()->json([
+            'success' => true,
+            'message' => "Direccion actualizada con exito"
+        ], 201);
+    }
+
+    public function actualizarNombre(Request $request): JsonResponse
+    {
+        $miUsuario = Usuario::where('me', true)->first();
+        $miUsuario->update([
+            'nombre' => $request->nombre
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => "Nombre actualizado con exito"
+        ], 201);
+    }
 }
