@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProductoUsuController;
 use App\Http\Controllers\UsuarioController;
@@ -35,6 +36,8 @@ Route::post('/auth/login',[AuthController::class,'loginUsuario']);
 Route::get('/auth/obtenerUsuario',[AuthController::class,'obtenerUsuario']);
 Route::get('/auth/logout',[AuthController::class,'logout']);
 
+Route::get('/carrito/mostrar_carrito/{idUsuario}',[CarritoController::class,'mostrarProductosCarrito']);
+Route::post('/carrito/añadir_carrito',[CarritoController::class,'añadirProducto']);
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });

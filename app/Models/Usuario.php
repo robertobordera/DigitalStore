@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Usuario extends Authenticatable implements AuthenticatableContract
 {
@@ -56,5 +57,10 @@ class Usuario extends Authenticatable implements AuthenticatableContract
     public function compras():HasMany
     {
         return $this->hasMany(Compra::class);
+    }
+
+    public function productos():BelongsToMany
+    {
+        return $this->belongsToMany(Producto::class,'carritos');
     }
 }
