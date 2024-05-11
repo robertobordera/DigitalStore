@@ -28,10 +28,39 @@ class CarritoController extends Controller
 
         $usuario = Usuario::find($id);
         $productos = $usuario->productos()->get();
+        $cont = 0;
+
+        foreach($productos as $producto){
+            $cont++;
+        }
+
+        foreach ($productos as $producto) {
+            $producto->total = $cont;
+        }
 
         return response()->json([
             'success' => true,
             'carritoProducts' => $productos
+        ],201);
+    }
+
+    public function borrarProductoCarrito(string $idUsuario, string $idProducto):JsonResponse{
+
+        $usuario = Usuario::find($idUsuario);
+        $usuario->productos()->wherePivot('producto_id', $idProducto)->detach();
+
+        return response()->json([
+            'success' => true,
+            'message' => "Producto eliminado del carrito"
+        ],201);
+    }
+
+    public function vaciarCarrito(string $idUsuario):JsonResponse{
+        Carrito::where('usuario_id',$idUsuario)->delete();
+
+        return response()->json([
+            "success" => true,
+            "message" => "Carrito vaciado"
         ],201);
     }
 }

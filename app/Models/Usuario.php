@@ -63,4 +63,9 @@ class Usuario extends Authenticatable implements AuthenticatableContract
     {
         return $this->belongsToMany(Producto::class,'carritos');
     }
+
+    public function productosusus():BelongsToMany
+    {
+        return $this->belongsToMany(Productousu::class,'favoritos');
+    }
 }

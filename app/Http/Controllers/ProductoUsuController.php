@@ -61,10 +61,26 @@ class ProductoUsuController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Mostrando comentarios',
-                'data' => $comentarios
+                'comentarios' => $comentarios
             ], 200);
         }
     }
+
+    public function DejarComentario(Request $request,string $id):JsonResponse{
+        $miUsuario = Usuario::where('me',true)->get()->first();
+        $comentario = Comentariousu::create([
+            'comentario' => $request->comentario,
+            'productousu_id' => $id,
+            'usuario_id'=> $miUsuario->id
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'comentario' => $comentario
+        ],201);
+    }
+
+
     public function ventas(int $idProducto, int $idUsuario): JsonResponse
     {
         $miUsuario = Usuario::where('me',true)->get()->first();

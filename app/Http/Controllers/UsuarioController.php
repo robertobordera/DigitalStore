@@ -11,6 +11,8 @@ use App\Models\Venta;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+
 
 class UsuarioController extends Controller
 {
@@ -82,6 +84,24 @@ class UsuarioController extends Controller
             'success' => true,
             'message' => 'Obteniendo mis productos',
             'data' => $productos
+        ], 200);
+    }
+
+    public function ObtenerMisProductosVendidos():JsonResponse
+    {
+        $miUsuario = Usuario::where('me', true)->get()->first();
+
+        $resultados = DB::table('usuarios as U')
+            ->join('ventas as V', 'V.usuario_id', '=', 'U.id')
+            ->join('productousus as P', 'P.id', '=', 'V.productousu_id')
+            ->select('P.titulo', 'P.precio', 'V.fecha')
+            ->where('V.usuario_id', $miUsuario->id)
+            ->get();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Obteniendo mis productos',
+            'data' => $resultados
         ], 200);
     }
 
