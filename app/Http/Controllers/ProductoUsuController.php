@@ -81,7 +81,7 @@ class ProductoUsuController extends Controller
     }
 
 
-    public function ventas(int $idProducto, int $idUsuario): JsonResponse
+    public function ventas(int $idUsuario,int $idProducto): JsonResponse
     {
         $miUsuario = Usuario::where('me',true)->get()->first();
          
@@ -110,8 +110,8 @@ class ProductoUsuController extends Controller
         ]);
     
         // Desactivar el producto
-        $producto_usu->activo = false;
-        $producto_usu->save();
+        $producto_usu->update(['activo' => false]);
+
     
         // Devolver la respuesta
         return response()->json([

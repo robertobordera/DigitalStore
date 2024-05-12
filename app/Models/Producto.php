@@ -49,4 +49,8 @@ class Producto extends Model
     {
         return $this->belongsToMany(Usuario::class,'carritos');
     }
+
+    public function solicitudes() {
+        return $this->hasMany(Solicitud::class);
+    }
 }

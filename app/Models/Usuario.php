@@ -24,6 +24,7 @@ class Usuario extends Authenticatable implements AuthenticatableContract
         'numeroCalle',
         'codigoPostal',
         'provincia',
+        'telefono',
         'latitud',
         'longitud',
         'me',
@@ -67,5 +68,13 @@ class Usuario extends Authenticatable implements AuthenticatableContract
     public function productosusus():BelongsToMany
     {
         return $this->belongsToMany(Productousu::class,'favoritos');
+    }
+
+    public function solicitudesEnviadas() {
+        return $this->hasMany(Solicitud::class, 'usuario_enviador_id');
+    }
+    
+    public function solicitudesRecibidas() {
+        return $this->hasMany(Solicitud::class, 'usuario_receptor_id');
     }
 }

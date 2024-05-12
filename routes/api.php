@@ -5,6 +5,7 @@ use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\FavoritoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProductoUsuController;
+use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,9 @@ Route::delete('/carrito/usuario/{idUsuario}/vaciar',[CarritoController::class,'v
 Route::get('/favoritos/mostrar_favoritos/{idUsuario}',[FavoritoController::class,'mostrarProductosFavoritos']);
 Route::post('/favoritos/anyadir_favorito',[FavoritoController::class,'añadirFavorito']);
 Route::delete('/favoritos/usuario/{idUsuario}/borrar/{idProductousu}',[FavoritoController::class,'borrarProductoFavoritos']);
+
+Route::get('/solicitud/solicitudes/{id}',[SolicitudController::class,'leerSolicitud']);
+Route::post('/solicitud/enviar',[SolicitudController::class,'enviarSolicitud']);
 
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
