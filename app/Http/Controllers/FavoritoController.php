@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Favorito;
+use App\Models\Productousu;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Models\Usuario;
-
+use Mockery\Undefined;
 
 class FavoritoController extends Controller
 {
@@ -27,8 +28,15 @@ class FavoritoController extends Controller
     public function mostrarProductosFavoritos(string $id):JsonResponse{
         // $productos = Carrito::where('usuario_id',$id)->get();
 
-        $usuario = Usuario::find($id);
-        $productos = $usuario->productosusus()->get();
+        if($id == "me"){
+            $miUsuario = Usuario::where('me', true)->get()->first();
+            $productos = $miUsuario->productosusus()->with('usuario')->get();
+        }
+        else
+        {
+            $miUsuario = Usuario::where('id', $id)->get()->first();
+            $productos = $miUsuario->productosusus()->with('usuario')->get();
+        }
       
         return response()->json([
             'success' => true,

@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('titulo');
             $table->float('precio');
-            $table->string('descripcion');
+            $table->longText('descripcion');
             $table->string('imagen')->nullable();
-            $table->boolean('activo')->default(false);
-            $table->date('fechaSubida')->default(date('Y-m-d'));
-            $table->unsignedBigInteger('categoria_id');
+            $table->boolean('activo')->default(true);
+            $table->dateTime('fechaSubida')->default(date('Y-m-d'));
+            $table->unsignedBigInteger('categoria_id')->default(1);
             $table->unsignedBigInteger('usuario_id');
             $table->timestamps();
         });

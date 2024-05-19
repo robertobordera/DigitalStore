@@ -17,8 +17,8 @@ return new class extends Migration
             $table->longText('imagen')->nullable();
             $table->float('precio');
             $table->string('entrega');
-            $table->string('descripcion');
-            $table->string('caracteristicas');
+            $table->longText('descripcion');
+            $table->longText('caracteristicas');
             $table->boolean('oferta')->default(false);
             $table->boolean('activo')->default(false);
             $table->unsignedBigInteger('categoria_id');

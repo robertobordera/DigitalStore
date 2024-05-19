@@ -15,7 +15,14 @@ class ProductoUsuController extends Controller
 {
     public function ObtenerProductosSubidos(string $id):JsonResponse
     {
-        $productos = Productousu::where('usuario_id',$id)->get();
+        if($id == "me"){
+            $miUsuario = Usuario::where('me',true)->get()->first();
+            $productos = Productousu::where('usuario_id',$miUsuario->id)->get();
+        }
+        else{
+            $productos = Productousu::where('usuario_id',$id)->get();
+        }
+
         return response()->json([
             'success'=>true,
             'data'=>$productos
@@ -122,19 +129,18 @@ class ProductoUsuController extends Controller
 
     public function SubirProducto(Request $request):JsonResponse
     {
-        $miUsuario = Usuario::where('me',true);
+        $miUsuario = Usuario::where('me',true)->get()->first();
+
         $producto = Productousu::create([
             'titulo' =>$request->titulo,
             'precio' =>$request->precio,
             'descripcion'=>$request->descripcion,
-            'activo'=>$request->activo,
-            'fechaSubida'=>date('Y-m-d'),
-            'categoria_id'=>3,
             'usuario_id'=>$miUsuario->id
         ]);
 
         return response()->json([
             'success' => true,
+            'message' => "Tu producto se ha subido con exito",
             'data'=>$producto
         ],201);
     }

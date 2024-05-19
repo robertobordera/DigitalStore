@@ -75,16 +75,20 @@ class UsuarioController extends Controller
         }
     }
 
-    public function ObtenerMisProductos(): JsonResponse
+    public function ObtenerMisProductos(string $id): JsonResponse
     {
-        $miUsuario = Usuario::where('me', true)->get()->first();
-        $productos = Productousu::all()->where('usuario_id', $miUsuario->id);
+        if($id == "me"){
+            $miUsuario = Usuario::where('me',true)->get()->first();
+            $productos = Productousu::where('usuario_id',$miUsuario->id)->where('activo',true)->with('usuario')->get();
+        }
+        else{
+            $productos = Productousu::where('usuario_id',$id)->with('usuario')->get();
+        }
 
         return response()->json([
-            'success' => true,
-            'message' => 'Obteniendo mis productos',
-            'data' => $productos
-        ], 200);
+            'success'=>true,
+            'data'=>$productos
+        ],200);
     }
 
     public function ObtenerMisProductosVendidos():JsonResponse
@@ -94,7 +98,7 @@ class UsuarioController extends Controller
         $resultados = DB::table('usuarios as U')
             ->join('ventas as V', 'V.usuario_id', '=', 'U.id')
             ->join('productousus as P', 'P.id', '=', 'V.productousu_id')
-            ->select('P.titulo', 'P.precio', 'V.fecha')
+            ->select('P.titulo', 'P.precio', 'V.fecha','P.imagen','U.avatar')
             ->where('V.usuario_id', $miUsuario->id)
             ->get();
         
@@ -164,6 +168,15 @@ class UsuarioController extends Controller
     public function misDatos(): JsonResponse
     {
         $miUsuario = Usuario::where('me', true)->first();
+
+        return response()->json([
+            'success' => true,
+            'usuario' => $miUsuario
+        ], 201);
+    }
+
+    public function datosUsuarios(string $id):JsonResponse{
+        $miUsuario = Usuario::where('id', $id)->first();
 
         return response()->json([
             'success' => true,

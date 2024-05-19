@@ -96,6 +96,22 @@ class ProductoController extends Controller
     }
 
 
+    public function limitProductos(string $numero,string $categoria):JsonResponse{
+        $query = Producto::where('activo', true)
+        ->orderBy('created_at', 'desc')
+        ->limit($numero);
+
+        if (!is_null($categoria)) {
+        $query->where('categoria_id', '!=', $categoria);
+        }
+
+        $productos = $query->get();
+
+        return response()->json([
+            'success' => true,
+            'datas' => $productos
+        ], 200);
+    }
 
     public function update(Request $request, string $id): JsonResponse
     {

@@ -13,12 +13,15 @@ use Illuminate\Support\Facades\Route;
 Route::resource('/productos',ProductoController::class);
 Route::get('/productos/{id}/valoraciones', [ProductoController::class, 'valoraciones']);
 Route::get('/productos/categoria/{id}', [ProductoController::class, 'productosCategoria']);
+Route::get('/productos/limit/{numero}/categoria/{categoria}', [ProductoController::class, 'limitProductos']);
+// Route::get('/productos/limit/{numero}', [ProductoController::class, 'limitProductos']);
 
 Route::get('/usuarios/{id}/reseñas', [UsuarioController::class, 'obtenerReseñasRealizas']);
-Route::get('/usuarios/misProductos',[UsuarioController::class,'ObtenerMisProductos']);
+Route::get('/usuarios/misProductos/{id}',[UsuarioController::class,'ObtenerMisProductos']);
 Route::get('/usuarios/misVentas',[UsuarioController::class,'ObtenerMisProductosVendidos']);
 Route::get('/usuarios/comentarios',[UsuarioController::class,'MisComentarios']);
 Route::get('/usuarios/me',[UsuarioController::class,'misDatos']);
+Route::get('/usuarios/datos/{id}', [UsuarioController::class, 'datosUsuarios']);
 Route::post('/usuarios/perfil', [UsuarioController::class, 'CambiarDatos']);
 Route::post('/usuarios/comentarios/{id}',[UsuarioController::class,'EditarComentarios']);
 Route::put('/usuarios/actualizarCorreo',[UsuarioController::class,'actualizarCorreo']);
@@ -32,7 +35,7 @@ Route::get('/marketPlace/productos',[ProductoUsuController::class,'ObtenerProduc
 Route::get('/marketPlace/producto/{idProducto}',[ProductoUsuController::class,'ObtenerProducto']);
 Route::get('/marketPlace/{idUsuario}/productos/{idProducto}',[ProductoUsuController::class,'ventas']);
 Route::get('/marketPlace/productos/comentarios/{idProducto}',[ProductoUsuController::class,'ObtenerComentariosProducto']);
-Route::post('/marketPlace/{idUsuario}/productosMarketPlace/{producto}',[ProductoUsuController::class,'SubirProducto']);
+Route::post('/marketPlace/subirProducto',[ProductoUsuController::class,'SubirProducto']);
 Route::post('/marketPlace/{idProducto}/comentarios',[ProductoUsuController::class,'DejarComentario']);
 
 Route::post('/auth/registro',[AuthController::class,'crearUsuario']);
