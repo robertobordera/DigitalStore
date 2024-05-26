@@ -144,5 +144,18 @@ class ProductoUsuController extends Controller
             'data'=>$producto
         ],201);
     }
+
+    public function obtenerDatosProductoVendedor($idProducto): JsonResponse {
+        $info = Productousu::select('titulo', 'descripcion','imagen', 'usuarios.nombre as nombre_usuario', 'usuarios.avatar as avatar_usuario')
+                    ->where('productousus.id', $idProducto)
+                    ->join('usuarios', 'productousus.usuario_id', '=', 'usuarios.id')
+                    ->first();
+    
+        return response()->json([
+            'data' => $info
+        ], 201);
+    }
+    
+    
     
 }

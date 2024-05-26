@@ -15,12 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Artisan::call('db:seed');
-        // User::factory(10)->create();
-
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call([
+            CategoriaSeeder::class,
+            ComentariousuSeeder::class,
+            ProductoSeeder::class,
+            ProductousuSeeder::class,
+            UsuarioSeeder::class,
+            ValoracionSeeder::class,
+            // Agrega aquí otros seeders que tengas
+        ]);
     }
 }
