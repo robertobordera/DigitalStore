@@ -7,6 +7,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Solicitud;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
 
 class SolicitudController extends Controller
 {
@@ -15,7 +17,8 @@ class SolicitudController extends Controller
         $solicitud = Solicitud::create([
             'usuario_enviador_id' => $request->usuario_enviador_id,
             'usuario_receptor_id' => $request->usuario_receptor_id,
-            'productousu_id' => $request->productousu_id
+            'productousu_id' => $request->productousu_id,
+            'fecha' => Carbon::now(),
         ]);
 
         return response()->json([

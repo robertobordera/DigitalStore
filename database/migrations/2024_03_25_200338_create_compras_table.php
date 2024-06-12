@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
             $table->float('total');
-            $table->date('fecha')->default(date('Y-m-d'));
             $table->unsignedBigInteger('productousu_id')->nullable();
             $table->unsignedBigInteger('producto_id')->nullable();
             $table->unsignedBigInteger('usuario_id');

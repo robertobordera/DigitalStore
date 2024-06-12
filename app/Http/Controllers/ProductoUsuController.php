@@ -10,6 +10,8 @@ use App\Models\Usuario;
 use App\Models\Venta;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
 
 class ProductoUsuController extends Controller
 {
@@ -78,7 +80,8 @@ class ProductoUsuController extends Controller
         $comentario = Comentariousu::create([
             'comentario' => $request->comentario,
             'productousu_id' => $id,
-            'usuario_id'=> $miUsuario->id
+            'usuario_id'=> $miUsuario->id,
+            'fecha' => Carbon::now(),
         ]);
 
         return response()->json([
@@ -106,14 +109,15 @@ class ProductoUsuController extends Controller
         $compra = Compra::create([
             'total'=>$producto_usu->precio,
             'productousu_id'=>$idProducto,
-            'usuario_id'=>$miUsuario->id
+            'usuario_id'=>$miUsuario->id,
         ]);
     
         // Crear la venta
         $venta = Venta::create([
             'total' =>  $producto_usu->precio,
             'productousu_id' => $idProducto,
-            'usuario_id' => $idUsuario // Usar el ID del usuario proporcionado
+            'usuario_id' => $idUsuario,
+            'fecha' => Carbon::now(),
         ]);
     
         // Desactivar el producto
@@ -135,7 +139,8 @@ class ProductoUsuController extends Controller
             'titulo' =>$request->titulo,
             'precio' =>$request->precio,
             'descripcion'=>$request->descripcion,
-            'usuario_id'=>$miUsuario->id
+            'usuario_id'=>$miUsuario->id,
+            'fechaSubida' => Carbon::now(),
         ]);
 
         return response()->json([

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Comentariousu;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class ComentariousuSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class ComentariousuSeeder extends Seeder
             'comentario' => '¿El precio es negociable?',
             'productousu_id' => 4,
             'editado'=>false,
+            'fecha' => Carbon::now(),
             'usuario_id'=> 1
         ]);
 
@@ -24,6 +26,7 @@ class ComentariousuSeeder extends Seeder
             'comentario' => '¿Haces envios?',
             'productousu_id' => 5,
             'editado'=>false,
+            'fecha' => Carbon::now(),
             'usuario_id'=> 1
         ]);
 
@@ -31,6 +34,7 @@ class ComentariousuSeeder extends Seeder
             'comentario' => 'Me interesa',
             'productousu_id' => 5,
             'editado'=>false,
+            'fecha' => Carbon::now(),
             'usuario_id'=> 2
         ]);
 
@@ -38,6 +42,7 @@ class ComentariousuSeeder extends Seeder
             'comentario' => 'Cuando podemos quedar',
             'productousu_id' => 5,
             'editado'=>false,
+            'fecha' => Carbon::now(),
             'usuario_id'=> 1
         ]);
     }

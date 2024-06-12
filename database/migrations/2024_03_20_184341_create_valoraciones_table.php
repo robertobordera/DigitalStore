@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('comentario');
             $table->float('puntuacion');
-            $table->date('fecha');
+            $table->dateTime('fecha');
             $table->unsignedBigInteger('producto_id');
             $table->unsignedBigInteger('usuario_id');
             $table->timestamps();

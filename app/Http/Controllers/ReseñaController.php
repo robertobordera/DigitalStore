@@ -9,6 +9,8 @@ use App\Models\Usuario;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
 
 class ReseñaController extends Controller
 {
@@ -18,7 +20,8 @@ class ReseñaController extends Controller
             'puntuacion' => $request->puntuacion,
             'usuario_enviador_id' => $request->usuario_enviador_id,
             'usuario_receptor_id' => $request->usuario_receptor_id,
-            'productousu_id' => $request->productousu_id
+            'productousu_id' => $request->productousu_id,
+            'fecha' => Carbon::now(),
         ]);
 
         return response()->json([

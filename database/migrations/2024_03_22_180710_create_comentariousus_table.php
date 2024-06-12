@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('comentariousus', function (Blueprint $table) {
             $table->id();
             $table->string('comentario');
-            $table->dateTime('fecha')->default(date('Y-m-d H:i:s'));
+            $table->dateTime('fecha')->default(date('Y-m-d H:m'));
             $table->boolean('editado')->default(false);
             $table->unsignedBigInteger('productousu_id');
             $table->unsignedBigInteger('usuario_id');

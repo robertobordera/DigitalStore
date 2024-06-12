@@ -15,6 +15,7 @@ class Compra extends Model
         'productousu_id',
         'producto_id',
         'usuario_id',
+        'fecha,'
     ];
 
     protected $hidden = [

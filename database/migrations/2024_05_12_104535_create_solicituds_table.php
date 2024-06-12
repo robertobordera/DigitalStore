@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('solicituds', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('fecha')->default(date('Y-m-d H:i:s'));
+            $table->dateTime('fecha');
             $table->unsignedBigInteger('usuario_enviador_id');
             $table->unsignedBigInteger('usuario_receptor_id');
             $table->unsignedBigInteger('productousu_id');

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('reseña');
             $table->float('puntuacion');
-            $table->dateTime('fecha')->default(date('Y-m-d H:i:s'));
+            $table->dateTime('fecha');
             $table->unsignedBigInteger('usuario_enviador_id');
             $table->unsignedBigInteger('usuario_receptor_id');
             $table->unsignedBigInteger('productousu_id');

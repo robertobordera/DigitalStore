@@ -18,7 +18,7 @@ return new class extends Migration
             $table->longText('descripcion');
             $table->string('imagen')->nullable();
             $table->boolean('activo')->default(true);
-            $table->dateTime('fechaSubida')->default(date('Y-m-d'));
+            $table->dateTime('fechaSubida');
             $table->unsignedBigInteger('categoria_id')->default(1);
             $table->unsignedBigInteger('usuario_id');
             $table->timestamps();

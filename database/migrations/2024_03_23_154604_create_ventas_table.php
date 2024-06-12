@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('ventas', function (Blueprint $table) {
             $table->id();
             $table->float('total');
-            $table->date('fecha')->default(date('Y-m-d'));
+            $table->dateTime('fecha')->default(date('Y-m-d'));
             $table->unsignedBigInteger('productousu_id');
             $table->unsignedBigInteger('usuario_id');
             $table->timestamps();
