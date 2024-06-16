@@ -56,9 +56,9 @@ class ProductoController extends Controller
         ], 200);
     }
 
-    public function create(): View
+    public function create()
     {
-        return view('producto.create');
+       
     }
 
     public function valoraciones(string $id): JsonResponse
