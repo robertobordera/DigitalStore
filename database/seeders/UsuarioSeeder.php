@@ -23,8 +23,8 @@ class UsuarioSeeder extends Seeder
             'codigoPostal' => 3690,
             'provincia'=>'Alicante',
             'telefono'=>'6010257512',
-            'latitud' => 65.4,
-            'longitud' => 78.5,
+            'latitud' => 38.39,
+            'longitud' => -0.52,
             'avatar' => 'storage/usuarios/avatar1.jpg',
             'me'=>false,
         ]);
@@ -38,8 +38,8 @@ class UsuarioSeeder extends Seeder
             'numeroCalle' => '98',
             'codigoPostal' => 8855,
             'telefono'=>'6010254542',
-            'latitud' => 65.4,
-            'longitud' => 78.5,
+            'latitud' => 38.39,
+            'longitud' => -0.52,
             'avatar' => 'storage/usuarios/avatar2.jpg',
             'me'=>false,
         ]);
@@ -53,8 +53,8 @@ class UsuarioSeeder extends Seeder
             'numeroCalle' => '98',
             'codigoPostal' => 5454,
             'telefono'=>'6014545455',
-            'latitud' => 65.4,
-            'longitud' => 78.5,
+            'latitud' => 38.39,
+            'longitud' => -0.52,
             'avatar' => 'storage/usuarios/avatar3.jpg',
             'me'=>false,
         ]);

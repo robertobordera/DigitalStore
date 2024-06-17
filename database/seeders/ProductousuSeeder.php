@@ -80,5 +80,38 @@ class ProductousuSeeder extends Seeder
             'categoria_id'=>2,
             'usuario_id'=>3
         ]);
+
+        Productousu::create([
+            'titulo'=>'Se vende xbox one',
+            'precio'=>200.99,
+            'imagen'=> 'storage/market/xbox.jpg',
+            'descripcion'=>'¡Hola! Estoy vendiendo mi Xbox One en excelente estado. La consola ha sido usada con mucho cuidado y funciona perfectamente. La vendo porque me estoy actualizando a una nueva consola.',
+            'activo'=>true,
+            'fechaSubida' =>Carbon::now()->format('Y-m-d H:i'),
+            'categoria_id'=>2,
+            'usuario_id'=>3
+        ]);
+
+        Productousu::create([
+            'titulo'=>'Se vende switch',
+            'precio'=>249.99,
+            'imagen'=> 'storage/market/switch.jpg',
+            'descripcion'=>'¡Hola! Estoy vendiendo mi Nintendo Switch que está en perfecto estado. La consola ha sido muy bien cuidada y funciona sin problemas. La vendo porque ya no tengo tiempo para jugar.',
+            'activo'=>true,
+            'fechaSubida' =>Carbon::now()->format('Y-m-d H:i'),
+            'categoria_id'=>2,
+            'usuario_id'=>3
+        ]);
+
+        Productousu::create([
+            'titulo'=>'Se vende mando xbox',
+            'precio'=>49.99,
+            'imagen'=> 'storage/market/mandoX.jpg',
+            'descripcion'=>'Estoy vendiendo un mando de xbox, el compañero perfecto para tus aventuras de gaming en la consola de próxima generación de Sony. Este mando ofrece una experiencia de juego inmersiva y cómoda, con tecnología innovadora y un diseño ergonómico que se adapta perfectamente a tus manos.',
+            'activo'=>true,
+            'fechaSubida' =>Carbon::now()->format('Y-m-d H:i'),
+            'categoria_id'=>2,
+            'usuario_id'=>3
+        ]);
     }
 }

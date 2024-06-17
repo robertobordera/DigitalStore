@@ -12,6 +12,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 
 class UsuarioController extends Controller
@@ -252,9 +253,18 @@ class UsuarioController extends Controller
             'nombre' => $request->nombre
         ]);
 
+        if($request->hasFile('avatar')) {
+            $path = $request->file('avatar')->store('public/usuarios');
+            // Remover el prefijo "/storage" de la URL
+            $url = str_replace('/storage', 'storage', Storage::url($path));
+            $miUsuario->update([
+                'avatar' => $url
+            ]);
+        }
         return response()->json([
             'success' => true,
             'message' => "Nombre actualizado con exito"
         ], 201);
     }
+
 }

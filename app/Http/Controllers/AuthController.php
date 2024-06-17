@@ -10,6 +10,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 
 
 class AuthController extends Controller
@@ -23,8 +25,18 @@ class AuthController extends Controller
             'calle' => $request->calle,
             'numeroCalle' => $request->numeroCalle,
             'codigoPostal' => $request->codigoPostal,
-            'provincia' => $request->provincia
+            'provincia' => $request->provincia,
+            'latitud' => $request->latitud,
+            'longitud' => $request->longitud
         ]);
+
+        if ($request->hasFile('avatar')) {
+            $path = $request->file('avatar')->store('public/usuarios');
+            // Remover el prefijo "/storage" de la URL
+            $url = str_replace('/storage', 'storage', Storage::url($path));
+            $user->avatar = $url;
+            $user->save();
+        }
 
         $token = $user->createToken('API Token')->plainTextToken;
         return response()->json([

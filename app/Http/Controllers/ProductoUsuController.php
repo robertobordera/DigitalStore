@@ -11,8 +11,7 @@ use App\Models\Venta;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-
-
+use Illuminate\Support\Facades\Storage;
 class ProductoUsuController extends Controller
 {
     public function ObtenerProductosSubidos(string $id):JsonResponse
@@ -142,6 +141,15 @@ class ProductoUsuController extends Controller
             'usuario_id'=>$miUsuario->id,
             'fechaSubida' => Carbon::now(),
         ]);
+
+        if ($request->hasFile('imagen')) {
+            $path = $request->file('imagen')->store('public/market');
+            // Remover el prefijo "/storage" de la URL
+            $url = str_replace('/storage', 'storage', Storage::url($path));
+            $producto->imagen = $url;
+            $producto->save();
+        }
+
 
         return response()->json([
             'success' => true,
