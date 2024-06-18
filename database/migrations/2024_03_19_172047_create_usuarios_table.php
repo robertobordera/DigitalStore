@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('numeroCalle');
             $table->string('codigoPostal');
             $table->string('provincia');
-            $table->string('telefono');
+            $table->string('telefono')->nullable();
             $table->float('latitud')->nullable();
             $table->float('longitud')->nullable();
             $table->string('avatar')->nullable();
